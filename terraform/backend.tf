@@ -190,7 +190,7 @@ resource "aws_ecs_task_definition" "backend" {
         interval : 30,
         timeout : 5,
         retries : 10,
-        startPeriod : 180,
+        startPeriod : 30,
       }
     },
   ])

@@ -35,7 +35,7 @@ def correct_grammar(model, text):
 async def startup_event():
     model_paths = glob.glob("/app/models/*.th")
     model = GecBERTModel(
-        vocab_path="/app/data/output_vocabulary_10k",
+        vocab_path="/app/data/output_vocabulary",
         model_paths=model_paths,
     )
     app.package = {"model": model}

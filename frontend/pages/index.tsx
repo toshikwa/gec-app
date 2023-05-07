@@ -1,11 +1,12 @@
-import { Container, Header, TextForms } from "components";
+import { Container, Header, Meta, TextForm } from "components";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <Container wide>
-        <TextForms />
+        <Meta />
+        <Header />
+        <TextForm />
       </Container>
     </>
   );

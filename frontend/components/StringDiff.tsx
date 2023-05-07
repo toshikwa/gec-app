@@ -22,6 +22,6 @@ export const StringDiff = ({ input, output, addedStyle }: StringDiffProps) => {
           </span>
         );
       });
-  }, [input, output]);
+  }, [input, output, addedStyle]);
   return <>{result.map((r) => r)}</>;
 };

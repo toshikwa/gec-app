@@ -1,12 +1,12 @@
-import { divStyle, formStyle, headerStyle, addedStyle } from "./TextForms.css";
+import { divStyle, formStyle, headerStyle, addedStyle } from "./TextForm.css";
 import { useState, useEffect } from "react";
 import { StringDiff } from "./StringDiff";
 
 const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "";
 
-interface TextFormsProps {}
+interface TextFormProps {}
 
-const TextForms = ({}: TextFormsProps) => {
+const TextForm = ({}: TextFormProps) => {
   const [input, setInput] = useState("");
   const [diff, setDiff] = useState(
     <StringDiff input={""} output={""} addedStyle={addedStyle} />
@@ -69,4 +69,4 @@ const TextForms = ({}: TextFormsProps) => {
   );
 };
 
-export default TextForms;
+export default TextForm;

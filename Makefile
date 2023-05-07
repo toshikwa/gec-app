@@ -9,8 +9,11 @@ build-backend:
 push-backend:
 	docker push ${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}
 
+run-frontend:
+	cd frontend && yarn dev
+
 run-backend:
-	docker run --rm -p 8080:8080 ${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}
+	cd backend && uvicorn run_local:app --host 0.0.0.0 --port 8080
 
 build-frontend:
 	cd frontend && yarn build

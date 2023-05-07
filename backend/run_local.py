@@ -1,23 +1,58 @@
-# Import libraries
-from gector.gec_model import GecBERTModel
+#!/usr/bin/env python -W ignore::DeprecationWarning
+# -*- coding: utf-8 -*-
 
-# Create an instance of the model
-model = GecBERTModel(
-    vocab_path="./data/vocabulary",
-    model_paths=[
-        "./models/deberta-large_1_best_10k.th",
-        "./models/roberta-large_1_best_10k.th",
-        "./models/xlnet-large_1_best_10k.th",
-    ],
+import logging
+import glob
+import uvicorn
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from gector.gec_model import GecBERTModel
+from schema import HealthResponse, InferenceInput, InferenceResponse
+
+
+logger = logging.getLogger(__name__)
+app = FastAPI(
+    title="gec-app",
+    description="Grammatical Error Correction",
+    version="0.0.1",
+    terms_of_service=None,
+    contact=None,
+    license_info=None,
 )
 
-# Add the sentence with grammatical errors
-text = "This is pens."
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-# Create an empty list to store the
-batch = []
-batch.append(text.split())
-final_batch, total_updates = model.handle_batch(batch)
-corrected_text = " ".join(final_batch[0])
-print(f"Original text: {text}")
-print(f"Corrected text: {corrected_text}")
+
+def correct_grammar(model, text):
+    batches = text.replace(".", " .").split("\n")
+    batches = [batch.split() for batch in batches]
+    responses, _ = model.handle_batch(batches)
+    responses = [" ".join(response) for response in responses]
+    return "\n".join(responses).replace(" .", ".")
+
+
+@app.on_event("startup")
+async def startup_event():
+    model_paths = glob.glob("./models/*.th")
+    model = GecBERTModel(
+        vocab_path="./data/output_vocabulary_10k",
+        model_paths=model_paths,
+    )
+    app.package = {"model": model}
+
+
+@app.post("/api/v1/predict")
+def do_predict(_: Request, body: InferenceInput) -> InferenceResponse:
+    logger.info(f"input text: {body.text}")
+    text = correct_grammar(app.package["model"], body.text)
+    logger.info(f"corrected text: {text}")
+    return {"text": text}
+
+
+@app.get("/health")
+def health(_: Request) -> HealthResponse:
+    return {"status": "ok"}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)

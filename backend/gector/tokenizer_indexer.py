@@ -1,6 +1,7 @@
-import copy
+"""Tweaked version of corresponding AllenNLP file"""
+import logging
 from collections import defaultdict
-from typing import Callable, Dict, List
+from typing import Dict, List, Callable
 
 from allennlp.common.util import pad_sequence_to_length
 from allennlp.data.token_indexers.token_indexer import TokenIndexer
@@ -11,6 +12,12 @@ from transformers import AutoTokenizer
 
 from gector.helpers import START_TOKEN
 from gector.tokenization import tokenize_batch
+import copy
+
+logger = logging.getLogger(__name__)
+
+
+# TODO(joelgrus): Figure out how to generate token_type_ids out of this token indexer.
 
 
 class TokenizerIndexer(TokenIndexer[int]):
@@ -120,7 +127,13 @@ class PretrainedBertIndexer(TokenizerIndexer):
         max_pieces_per_token: int = 5,
         special_tokens_fix: int = 0,
     ) -> None:
+        if pretrained_model.endswith("-cased") and do_lowercase:
+            logger.warning("Your BERT model appears to be cased, " "but your indexer is lowercasing tokens.")
+        elif pretrained_model.endswith("-uncased") and not do_lowercase:
+            logger.warning("Your BERT model appears to be uncased, " "but your indexer is not lowercasing tokens.")
+
         model_name = copy.deepcopy(pretrained_model)
+
         model_tokenizer = AutoTokenizer.from_pretrained(
             model_name, do_lower_case=do_lowercase, do_basic_tokenize=False, use_fast=True
         )

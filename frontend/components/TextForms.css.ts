@@ -18,8 +18,10 @@ export const formStyle = style({
   border: "0.5px solid var(--black)",
   color: "var(--black)",
   resize: "none",
-  fontSize: "1.1rem",
-  fontWeight: "100",
+  letterSpacing: ".001px",
+  lineHeight: "1.6",
+  fontSize: "1.2rem",
+  fontWeight: "200",
   padding: "1.4rem 1.4rem",
   width: "50%",
   height: "24rem",
@@ -27,4 +29,5 @@ export const formStyle = style({
 
 export const addedStyle = style({
   backgroundColor: "var(--accent)",
+  padding: ".1em",
 });

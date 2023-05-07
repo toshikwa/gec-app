@@ -24,19 +24,18 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 
 
 def correct_grammar(model, text):
-    batches = text.split("\n")
+    batches = text.replace(".", " .").split("\n")
     batches = [batch.split() for batch in batches]
     responses, _ = model.handle_batch(batches)
-    response = [" ".join(response) for response in responses]
-    res = "\n".join(response)
-    return res.replace(" .", ".")
+    responses = [" ".join(response) for response in responses]
+    return "\n".join(responses).replace(" .", ".")
 
 
 @app.on_event("startup")
 async def startup_event():
     model_paths = glob.glob("/app/models/*.th")
     model = GecBERTModel(
-        vocab_path="/app/data/vocabulary",
+        vocab_path="/app/data/output_vocabulary_10k",
         model_paths=model_paths,
     )
     app.package = {"model": model}

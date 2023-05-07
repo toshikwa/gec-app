@@ -134,3 +134,4 @@ dmypy.json
 
 # gec-app
 models/
+archive/

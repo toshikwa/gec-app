@@ -10,12 +10,11 @@ from allennlp.data.tokenizers import Token
 from allennlp.modules.text_field_embedders import BasicTextFieldEmbedder
 from allennlp.nn import util
 
-from gector.wordpiece_indexer import PretrainedBertIndexer
+# from gector.wordpiece_indexer import PretrainedBertIndexer
+from gector.tokenizer_indexer import PretrainedBertIndexer
 from gector.bert_token_embedder import PretrainedBertEmbedder
 from gector.helpers import PAD, START_TOKEN, UNK, get_target_sent_by_edits, get_weights_name
 from gector.seq2labels_model import Seq2Labels
-
-# from gector.tokenizer_indexer import PretrainedBertIndexer
 
 
 class GecBERTModel(object):
@@ -27,7 +26,7 @@ class GecBERTModel(object):
         min_len=3,
         lowercase_tokens=False,
         log=False,
-        iterations=3,
+        iterations=5,
         model_name="roberta",
         special_tokens_fix=1,
         min_error_probability=0.0,
@@ -147,9 +146,6 @@ class GecBERTModel(object):
             do_lowercase=self.lowercase_tokens,
             max_pieces_per_token=5,
             special_tokens_fix=special_tokens_fix,
-            use_starting_offsets=True,
-            truncate_long_sequences=True,
-            is_test=True,
         )
         return {"bert": bert_token_indexer}
 

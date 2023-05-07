@@ -1,0 +1,9 @@
+torch==1.12.1
+allennlp==0.8.4
+transformers==4.11.3
+scikit-learn==0.20.0
+sentencepiece==0.1.95
+overrides==4.1.2
+numpy== 1.19.5
+fastapi==0.95.1
+uvicorn==0.22.0

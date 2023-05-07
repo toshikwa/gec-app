@@ -1,13 +1,14 @@
 import { useMemo } from "react";
 import * as Diff from "diff";
+import { addedStyle } from "./StringDiff.css";
 
 interface StringDiffProps {
   input: string;
   output: string;
-  addedStyle: string;
+  isLast: boolean;
 }
 
-export const StringDiff = ({ input, output, addedStyle }: StringDiffProps) => {
+export const StringDiff = ({ input, output, isLast }: StringDiffProps) => {
   const result = useMemo(() => {
     const diff = Diff["diffWords"](input, output);
     return diff
@@ -22,6 +23,11 @@ export const StringDiff = ({ input, output, addedStyle }: StringDiffProps) => {
           </span>
         );
       });
-  }, [input, output, addedStyle]);
-  return <>{result.map((r) => r)}</>;
+  }, [input, output]);
+  return (
+    <>
+      {result.map((r) => r)}
+      {isLast || <br />}
+    </>
+  );
 };

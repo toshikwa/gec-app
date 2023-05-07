@@ -20,14 +20,10 @@ export const formStyle = style({
   resize: "none",
   letterSpacing: ".001px",
   lineHeight: "1.6",
-  fontSize: "1.2rem",
+  fontSize: "1rem",
   fontWeight: "200",
   padding: "1.4rem 1.4rem",
   width: "50%",
   height: "24rem",
-});
-
-export const addedStyle = style({
-  backgroundColor: "var(--accent)",
-  padding: ".1em",
+  overflow: "scroll",
 });

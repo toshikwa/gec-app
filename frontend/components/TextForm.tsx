@@ -1,4 +1,4 @@
-import { divStyle, formStyle, headerStyle, addedStyle } from "./TextForm.css";
+import { divStyle, formStyle, headerStyle } from "./TextForm.css";
 import { useState, useEffect } from "react";
 import { StringDiff } from "./StringDiff";
 
@@ -9,7 +9,7 @@ interface TextFormProps {}
 const TextForm = ({}: TextFormProps) => {
   const [input, setInput] = useState("");
   const [diff, setDiff] = useState(
-    <StringDiff input={""} output={""} addedStyle={addedStyle} />
+    <StringDiff input={""} output={""} isLast={true} />
   );
 
   // update output text with delay
@@ -23,12 +23,19 @@ const TextForm = ({}: TextFormProps) => {
       fetch(backendApiUrl, requestParams)
         .then((res) => res.json())
         .then((data) => {
+          const inputs = input.split("\n");
+          const outputs = data.text.split("\n");
           setDiff(
-            <StringDiff
-              input={input}
-              output={data.text}
-              addedStyle={addedStyle}
-            />
+            <>
+              {inputs.map((_, i) => (
+                <StringDiff
+                  key={i}
+                  input={inputs[i]}
+                  output={outputs[i]}
+                  isLast={i == inputs.length}
+                />
+              ))}
+            </>
           );
         });
     }, 500);
@@ -53,6 +60,7 @@ const TextForm = ({}: TextFormProps) => {
       </div>
       <div className={divStyle}>
         <textarea
+          wrap="soft"
           className={formStyle}
           onChange={handleTextChange}
           value={input}

@@ -1,0 +1,74 @@
+:root {
+  --white: #ffffff;
+  --gray-10: #dbdbdb;
+  --gray-25: #b8b8b8;
+  --gray-50: #969797;
+  --gray-75: #757777;
+  --gray-100: #676969;
+  --black: #383c3c;
+  --accent: #f9c89b;
+
+  --site-title: clamp(1.75rem, 2vw + 1rem, 2.2rem);
+  --site-subtitle: clamp(0.75rem, 2vw + 1rem, 1.12rem);
+  --heading2: clamp(1.4rem, 2vw + 1rem, 1.7rem);
+  --heading3: clamp(1.125rem, 1vw + 1rem, 1.36rem);
+  --heading4: clamp(0.95rem, 1vw + 0.8rem, 1.2rem);
+  --body: clamp(0.95rem, 1vw + 0.5rem, 1.05rem);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: var(--black);
+  background-color: var(--white);
+  font-size: var(--body);
+  font-weight: 300;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: var(--heading1);
+}
+
+h2 {
+  font-size: var(--heading2);
+}
+
+h3 {
+  font-size: var(--heading3);
+}
+
+h4 {
+  font-size: var(--heading4);
+}
+
+p {
+  line-height: 2.2rem;
+}
+
+li {
+  line-height: 1.9rem;
+}
+
+ul {
+  margin: 1.5rem 0;
+}
+
+br {
+  font-size: var(--body);
+}

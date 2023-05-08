@@ -10,7 +10,6 @@ from allennlp.data.tokenizers import Token
 from allennlp.modules.text_field_embedders import BasicTextFieldEmbedder
 from allennlp.nn import util
 
-# from gector.wordpiece_indexer import PretrainedBertIndexer
 from gector.tokenizer_indexer import PretrainedBertIndexer
 from gector.bert_token_embedder import PretrainedBertEmbedder
 from gector.helpers import PAD, START_TOKEN, UNK, get_target_sent_by_edits, get_weights_name

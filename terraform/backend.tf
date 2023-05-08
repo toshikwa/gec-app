@@ -210,6 +210,11 @@ resource "aws_ecs_service" "backend" {
     registry_arn = aws_service_discovery_service.backend.arn
     port         = 8080
   }
+  lifecycle {
+    ignore_changes = [
+      capacity_provider_strategy
+    ]
+  }
 }
 resource "aws_service_discovery_private_dns_namespace" "backend" {
   name = "${replace(local.app, "_", "-")}.local"

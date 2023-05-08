@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 const container = style({
+  color: "var(--black)",
   width: "92%",
   margin: "0 auto",
 });

@@ -5,11 +5,16 @@ import { StringDiff } from "./StringDiff";
 
 const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "";
 
+interface TextPair {
+  input: string;
+  output: string;
+}
+
 interface TextFormProps {}
 
 const TextForm = ({}: TextFormProps) => {
   const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
+  const [textPair, setTextPair] = useState<TextPair>({ input: "", output: "" });
   const [showRemoved, setShowRemoved] = useState(true);
   const [diff, setDiff] = useState(
     <StringDiff
@@ -21,8 +26,8 @@ const TextForm = ({}: TextFormProps) => {
   );
 
   useEffect(() => {
-    const inputs = input.split("\n");
-    const outputs = output.split("\n");
+    const inputs = textPair.input.split("\n");
+    const outputs = textPair.output.split("\n");
     setDiff(
       <>
         {inputs.map((_, i) => (
@@ -36,7 +41,7 @@ const TextForm = ({}: TextFormProps) => {
         ))}
       </>
     );
-  }, [output, showRemoved]);
+  }, [textPair, showRemoved]);
 
   // update output text with delay
   useEffect(() => {
@@ -49,7 +54,7 @@ const TextForm = ({}: TextFormProps) => {
       fetch(backendApiUrl, requestParams)
         .then((res) => res.json())
         .then((data) => {
-          setOutput(data.text);
+          setTextPair({ input, output: data.text });
         });
     }, 500);
     return () => clearTimeout(timer);

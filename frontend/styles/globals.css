@@ -1,13 +1,7 @@
 :root {
-  --white: #ffffff;
-  --gray-10: #dbdbdb;
-  --gray-25: #b8b8b8;
-  --gray-50: #969797;
-  --gray-75: #757777;
-  --gray-100: #676969;
   --black: #4d5151;
   --accent: #f0cfb0;
-
+  --secondary: #98c3d4;
   --site-title: clamp(1.75rem, 2vw + 1rem, 2.2rem);
   --site-subtitle: clamp(0.75rem, 2vw + 1rem, 1.12rem);
   --heading2: clamp(1.4rem, 2vw + 1rem, 1.7rem);
@@ -21,9 +15,6 @@ body {
   padding: 0;
   margin: 0;
   list-style: none;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-feature-settings: normal;
   color: var(--black);
   background-color: var(--white);

@@ -19,7 +19,7 @@ build-frontend:
 	cd frontend && yarn build
 
 push-frontend:
-	cd frontend && aws s3 sync ./out s3://gec-app-frontend/
+	aws s3 sync ./frontend/out s3://gec-app-frontend/
 
 apply:
 	cd terraform && terraform apply -auto-approve

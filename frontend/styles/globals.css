@@ -1,8 +1,8 @@
 :root {
   --accent-light: #f0cfb0;
   --secondary-light: #98c3d4;
-  --accent-dark: #9c4221;
-  --secondary-dark: #234e52;
+  --accent-dark: #bc6646;
+  --secondary-dark: #356268;
   --site-title: clamp(1.75rem, 2vw + 1rem, 2.2rem);
   --site-subtitle: clamp(0.75rem, 2vw + 1rem, 1.12rem);
   --heading2: clamp(1.4rem, 2vw + 1rem, 1.7rem);

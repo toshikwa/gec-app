@@ -40,8 +40,8 @@ resource "aws_cloudfront_distribution" "frontend" {
   }
   restrictions {
     geo_restriction {
-      restriction_type = "whitelist"
-      locations        = ["JP"]
+      restriction_type = "none"
+      locations        = []
     }
   }
   viewer_certificate {

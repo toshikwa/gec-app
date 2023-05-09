@@ -22,7 +22,7 @@ export const divStyle = style({
 });
 
 export const headerStyle = style({
-  color: "var(--black)",
+  color: "var(--chakra-colors-fontColor-main)",
   fontSize: "var(--heading3)",
   padding: "0 0.4rem",
   width: "100%",
@@ -42,8 +42,9 @@ export const buttonStyle = style({
 export const formStyle = style({
   display: "block",
   fontFamily: "var(--chakra-fonts-body)",
-  border: "0.5px solid var(--black)",
-  color: "var(--black)",
+  border: "1px solid var(--chakra-colors-chakra-border-color)",
+  color: "var(--chakra-colors-chakra-body-text)",
+  backgroundColor: "var(--chakra-colors-chakra-body-bg)",
   fontSize: "var(--body)",
   resize: "none",
   letterSpacing: ".001px",

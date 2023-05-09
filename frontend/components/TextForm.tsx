@@ -6,7 +6,7 @@ import {
   textFormStyle,
 } from "./TextForm.css";
 import { useState, useEffect } from "react";
-import { Button } from "@chakra-ui/react";
+import { Button, ColorMode } from "@chakra-ui/react";
 import { StringDiff } from "./StringDiff";
 
 const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "";
@@ -16,9 +16,11 @@ interface TextPair {
   output: string;
 }
 
-interface TextFormProps {}
+interface TextFormProps {
+  colorMode: ColorMode;
+}
 
-const TextForm = ({}: TextFormProps) => {
+const TextForm = ({ colorMode }: TextFormProps) => {
   const [input, setInput] = useState("");
   const [textPair, setTextPair] = useState<TextPair>({ input: "", output: "" });
   const [showRemoved, setShowRemoved] = useState(true);
@@ -28,6 +30,7 @@ const TextForm = ({}: TextFormProps) => {
       output={""}
       isLast={true}
       showRemoved={showRemoved}
+      colorMode={colorMode}
     />
   );
 
@@ -43,11 +46,12 @@ const TextForm = ({}: TextFormProps) => {
             output={outputs[i]}
             isLast={i == inputs.length}
             showRemoved={showRemoved}
+            colorMode={colorMode}
           />
         ))}
       </>
     );
-  }, [textPair, showRemoved]);
+  }, [textPair, showRemoved, colorMode]);
 
   // update output text with delay
   useEffect(() => {

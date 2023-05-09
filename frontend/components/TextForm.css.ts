@@ -53,4 +53,9 @@ export const formStyle = style({
   width: "100%",
   height: "24rem",
   overflow: "scroll",
+  "@media": {
+    "(max-width: 768px)": {
+      height: "15rem",
+    },
+  },
 });

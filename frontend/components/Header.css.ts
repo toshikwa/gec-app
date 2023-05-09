@@ -3,27 +3,14 @@ import { style } from "@vanilla-extract/css";
 export const headerStyle = {
   container: style({
     display: "block",
-    margin: "2.5rem 0 3.8rem",
+    margin: "2.5rem 0 3.2rem",
     textAlign: "left",
-    "@media": {
-      "(hover: none)": {
-        WebkitTapHighlightColor: "transparent",
-        ":active": {
-          color: "var(--gray-100)",
-        },
-      },
-      "(hover: hover)": {
-        ":hover": {
-          color: "var(--gray-100)",
-        },
-      },
-    },
   }),
   title: style({
     fontSize: "var(--site-title)",
     fontWeight: 500,
     letterSpacing: "0.1em",
-    marginBottom: "0.6rem",
+    marginBottom: "0.2rem",
   }),
   subtitle: style({
     fontSize: "var(--site-subtitle)",

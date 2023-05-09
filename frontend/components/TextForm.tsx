@@ -1,4 +1,10 @@
-import { buttonStyle, divStyle, formStyle, headerStyle } from "./TextForm.css";
+import {
+  buttonStyle,
+  divStyle,
+  formStyle,
+  headerStyle,
+  textFormStyle,
+} from "./TextForm.css";
 import { useState, useEffect } from "react";
 import { Button } from "@chakra-ui/react";
 import { StringDiff } from "./StringDiff";
@@ -67,11 +73,20 @@ const TextForm = ({}: TextFormProps) => {
     setInput(event.target.value);
   };
   return (
-    <>
+    <div className={textFormStyle}>
       <div className={divStyle}>
         <div className={headerStyle}>
           <span>Input</span>
         </div>
+        <div>
+          <textarea
+            className={formStyle}
+            onChange={handleTextChange}
+            value={input}
+          />
+        </div>
+      </div>
+      <div className={divStyle}>
         <div className={headerStyle}>
           <span>Output</span>
           <Button
@@ -82,22 +97,15 @@ const TextForm = ({}: TextFormProps) => {
             {showRemoved ? "Hide removed words" : "Show removed words"}
           </Button>
         </div>
-      </div>
-      <div className={divStyle}>
-        <textarea
-          className={formStyle}
-          onChange={handleTextChange}
-          value={input}
-        />
         <code
           contentEditable={true}
-          className={formStyle}
           suppressContentEditableWarning={true}
+          className={formStyle}
         >
           {diff}
         </code>
       </div>
-    </>
+    </div>
   );
 };
 
